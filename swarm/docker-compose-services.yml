@@ -41,6 +41,23 @@ services:
     networks:
       - workbench
 
+  datascience-notebook:
+      image:            jupyter/pyspark-notebook
+      volumes:
+        - /home/jens/jupyter:/home/jovyan/work
+      ports:
+        - 8888:8888
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.docker.network: workbench
+        traefik.port: 8888
+    networks:
+      - workbench
+
 volumes:
   zeppelinnotebooks:
 
