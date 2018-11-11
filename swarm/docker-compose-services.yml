@@ -45,6 +45,8 @@ services:
     image: jupyter/pyspark-notebook
     volumes:
     - /home/jens/jupyter:/home/jovyan/work
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
     ports:
     - "8888:8888"
     deploy:
