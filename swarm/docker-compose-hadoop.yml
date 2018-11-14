@@ -2,7 +2,6 @@ version: '3'
 services:
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
-    hostname: "hadoop-namenode"
     networks:
       - workbench
     volumes:
@@ -33,7 +32,7 @@ services:
     env_file:
       - ./hadoop.env
     environment:
-      SERVICE_PRECONDITION: "hadoop-namenode:50070"
+      SERVICE_PRECONDITION: "namenode:50070"
     deploy:
       # mode global will deploy one datanode per docker swarm node
       mode: global
