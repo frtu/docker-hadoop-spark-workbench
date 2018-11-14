@@ -33,7 +33,7 @@ services:
     env_file:
       - ./hadoop.env
     environment:
-      SERVICE_PRECONDITION: "namenode:50070"
+      SERVICE_PRECONDITION: "hadoop-namenode:50070"
     deploy:
       # mode global will deploy one datanode per docker swarm node
       mode: global
