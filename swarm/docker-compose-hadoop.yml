@@ -2,6 +2,8 @@ version: '3'
 services:
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    ports:
+    - "50070:50070"
     networks:
       - workbench
     volumes:
@@ -25,6 +27,8 @@ services:
 
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    ports:
+    - "50075:50075"
     networks:
       - workbench
     volumes:
