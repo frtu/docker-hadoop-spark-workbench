@@ -18,7 +18,7 @@ services:
       - workbench
 
   datascience-notebook:
-    image: jupyter/pyspark-notebook
+    image: jup:2.7
     volumes:
     - /home/jens/jupyter:/home/jovyan/work
     environment:
