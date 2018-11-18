@@ -5,6 +5,8 @@ services:
     ports:
     - "50070:50070"
     - "9000:9000"
+    expose:
+    - 9000
     networks:
       - workbench
     volumes:
@@ -31,6 +33,10 @@ services:
     image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     ports:
     - "50075:50075"
+    expose:
+    - 50010
+    - 50020
+    - 50075
     networks:
       - workbench
     volumes:
@@ -46,8 +52,9 @@ services:
         condition: on-failure
       labels:
         traefik.docker.network: workbench
-        traefik.port: 50075
         traefik.port: 50010
+        traefik.port: 50020
+        traefik.port: 50075
 
 volumes:
   datanode:
