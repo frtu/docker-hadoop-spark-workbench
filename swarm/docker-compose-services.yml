@@ -18,7 +18,7 @@ services:
       - workbench
 
   datascience-notebook:
-    image: gottit/jupyter-py27
+    image: gottit/jupyter-py27:1.0
     volumes:
     - /home/jens/jupyter:/home/jovyan/work
     environment:
