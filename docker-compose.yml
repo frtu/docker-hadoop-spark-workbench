@@ -11,6 +11,7 @@ services:
       - ./hadoop.env
     ports:
       - 50070:50070
+      - 8020:8020
   datanode:
     image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
     depends_on: 
@@ -52,3 +53,14 @@ services:
       - 8088:8088
     environment:
       - NAMENODE_HOST=namenode
+  datascience-notebook:
+    image: gottit/jupyter-py27:1.0
+    container_name: spark-notebook
+    env_file:
+      - ./hadoop.env
+    ports:
+    - "8888:8888"
+    volumes:
+    - /home/jens/jupyter:/home/jovyan/work
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
