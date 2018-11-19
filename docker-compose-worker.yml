@@ -9,7 +9,7 @@ services:
     ports:
       - 50075:50075
   spark-worker:
-    image: bde2020/spark-worker:2.4.0-hadoop2.78
+    image: bde2020/spark-worker:2.4.0-hadoop2.7
     environment:
       - SPARK_MASTER=spark://192.168.1.28:7077
     ports:
