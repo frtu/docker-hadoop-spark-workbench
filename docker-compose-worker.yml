@@ -1,18 +1,18 @@
 version: '2' 
 services:
   datanode:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.8-java8
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     volumes:
       - ./data/datanode:/hadoop/dfs/data
     env_file:
-      - ./hadoop.env
+      - ./hadoop-worker.env
     ports:
       - 50075:50075
   spark-worker:
-    image: bde2020/spark-worker:2.1.0-hadoop2.8-hive-java8
+    image: bde2020/spark-worker:2.4.0-hadoop2.78
     environment:
-      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_MASTER=spark://192.168.1.28:7077
     ports:
       - 8081:8081
     env_file:
-      - ./hadoop.env
+      - ./hadoop-worker.env
