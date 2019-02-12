@@ -20,7 +20,7 @@ services:
   datascience-notebook:
     image: gottit/jupyter-py27:1.0
     volumes:
-    - /home/jens/jupyter:/home/jovyan/work
+    - /home/docker:/home/jovyan/work
     environment:
       - SPARK_MASTER=spark://spark-master:7077
     ports:
