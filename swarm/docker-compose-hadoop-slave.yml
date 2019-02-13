@@ -14,7 +14,8 @@ services:
       SERVICE_PRECONDITION: "namenode:50070"
     deploy:
       # mode global will deploy one datanode per docker swarm node
-      mode: global
+      mode: replicated
+      replicas: 1
       restart_policy:
         condition: on-failure
       labels:
