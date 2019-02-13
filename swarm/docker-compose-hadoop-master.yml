@@ -5,6 +5,7 @@ services:
     ports:
     - "50070:50070"
     - "9000:9000"
+    - "8088:8088"
     networks:
       - workbench
     volumes:
@@ -26,29 +27,7 @@ services:
         traefik.docker.network: workbench
         traefik.port: 50070
 
-  datanode:
-    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
-    ports:
-    - "50075:50075"
-    networks:
-      - workbench
-    volumes:
-      - datanode:/hadoop/dfs/data
-    env_file:
-      - ./hadoop.env
-    environment:
-      SERVICE_PRECONDITION: "namenode:50070"
-    deploy:
-      # mode global will deploy one datanode per docker swarm node
-      mode: global
-      restart_policy:
-        condition: on-failure
-      labels:
-        traefik.docker.network: workbench
-        traefik.port: 50075
-
 volumes:
-  datanode:
   namenode:
 
 networks:
