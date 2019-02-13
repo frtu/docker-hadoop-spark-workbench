@@ -16,6 +16,7 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      endpoint_mode: dnsrr
       restart_policy:
         condition: on-failure
       # add placement constraint to allocate namenode on particular server
@@ -41,6 +42,7 @@ services:
     deploy:
       # mode global will deploy one datanode per docker swarm node
       mode: global
+      endpoint_mode: dnsrr
       restart_policy:
         condition: on-failure
       labels:
