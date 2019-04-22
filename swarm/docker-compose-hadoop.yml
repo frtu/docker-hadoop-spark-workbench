@@ -19,9 +19,9 @@ services:
       restart_policy:
         condition: on-failure
       # add placement constraint to allocate namenode on particular server
-      #placement:
-      #  constraints:
-      #    - node.hostname == master.node.com
+      placement:
+        constraints:
+          - node.role == manager:
       labels:
         traefik.docker.network: workbench
         traefik.port: 50070
@@ -30,6 +30,7 @@ services:
     image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     ports:
     - "50075:50075"
+    - "50010:50010"
     networks:
       - workbench
     volumes:
@@ -39,8 +40,12 @@ services:
     environment:
       SERVICE_PRECONDITION: "namenode:50070"
     deploy:
-      # mode global will deploy one datanode per docker swarm node
-      mode: global
+      # will deploy one datanode per docker swarm node except NN
+      mode: replicated
+      replicas: 10
+      placement:
+        constraints:
+          - node.role != manager
       restart_policy:
         condition: on-failure
       labels:
