@@ -30,13 +30,24 @@ services:
       - SPARK_MASTER=spark://spark-master:7077
     env_file:
       - ./hadoop.env
+  spark-notebook:
+    build:
+      context: "./spark-notebook"
+      dockerfile: "Dockerfile"
+    container_name: spark-notebook
+    environment:
+      - SPARK_EXECUTOR_MEMORY=1G
+    env_file:
+      - ./hadoop.env
+    ports:
+      - 9001:9001
   hue:
     image: bde2020/hdfs-filebrowser:3.11
     environment:
       - NAMENODE_HOST=namenode
   datascience-notebook:
     image: gottit/jupyter-py27:1.0
-    container_name: spark-notebook
+    container_name: datascience-notebook
     env_file:
       - ./hadoop.env
     volumes:
